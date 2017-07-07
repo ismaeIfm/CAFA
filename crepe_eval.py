@@ -55,6 +55,7 @@ if __name__ == '__main__':
         verbose=1)
 
     m.compile(optimizer='adamax', loss='binary_crossentropy')
+    m.save('roc/cafa/%s/mlom/%s' % m.name, weights=False)
 
     callbacks = [
         EarlyStopping(monitor='val_loss', patience=10),
@@ -77,4 +78,3 @@ if __name__ == '__main__':
         epochs=1000,
         pretrain_epochs=1000,
         verbose=1)
-    m.save('roc/cafa/mlom/%s' % m.name, weights=False)
