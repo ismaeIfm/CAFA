@@ -8,7 +8,7 @@ from mlom.datasets.create_CAFATrainingData import create_go_cafa_dataset
 from mlom.encoders.input.text import TokenizerWrapper
 from mlom.encoders.output import OutputEncoder
 from mlom.mlom import MLOM
-from mlom.models import get
+from mlom.models import get_lstm_model
 from mlom.utils import AUCCallback, get_data
 
 if __name__ == '__main__':
