@@ -6,7 +6,6 @@ from keras.callbacks import EarlyStopping
 
 from mlom.bio.encoders import seqVectorizer
 from mlom.datasets.create_CAFATrainingData import create_go_cafa_dataset
-from mlom.encoders.input.text import CrepeEncoder
 from mlom.encoders.output import OutputEncoder
 from mlom.mlom import MLOM
 from mlom.models import get_crepe_model, get_standard_model
@@ -40,22 +39,24 @@ if __name__ == '__main__':
     ############################################################################
 
     m = MLOM(
-        name='seq2vec_vae',
+        name='seq2vec',
         models=[seqVec],
         format_={
             'X':
             X_name,
-            'y': [{
-                'name': label,
-                'activation': 'sigmoid',
-                'encoder': label_encoders[label],
-                'vae': True
-            } for label in y_names]
+            'y': [
+                {
+                    'name': label,
+                    'activation': 'sigmoid',
+                    'encoder': label_encoders[label],
+                    #'vae': True
+                } for label in y_names
+            ]
         },
         verbose=1)
 
     m.compile(optimizer='adamax', loss='binary_crossentropy')
-
+    #m.save('roc/cafa/%s/mlom/%s' % m.name, weights=False)
     callbacks = [
         EarlyStopping(monitor='val_loss', patience=10),
         AUCCallback(
@@ -72,8 +73,8 @@ if __name__ == '__main__':
         data=data,
         encoded=False,
         validation_data=valid_dataset,
-        batch_size=512,
+        batch_size=128,
         callbacks=callbacks,
-        epochs=100000,
-        pretrain_epochs=1000,
+        epochs=1000,
+        #pretrain_epochs=1000,
         verbose=1)
