@@ -31,24 +31,26 @@ if __name__ == '__main__':
         label_encoders[l].fit(data[l])
 
     ############################################################################
-    crepe_enc = CrepeEncoder(maxlen=150)
+    crepe_enc = CrepeEncoder(maxlen=1024)
     crepe_model = get_crepe_model(input_encoder=crepe_enc)
 
     crepe = {'model': crepe_model, 'input_encoder': crepe_enc}
     ############################################################################
 
     m = MLOM(
-        name='crepe_vae',
+        name='crepe',
         models=[crepe],
         format_={
             'X':
             X_name,
-            'y': [{
-                'name': label,
-                'activation': 'sigmoid',
-                'encoder': label_encoders[label],
-                'vae': True
-            } for label in y_names]
+            'y': [
+                {
+                    'name': label,
+                    'activation': 'sigmoid',
+                    'encoder': label_encoders[label],
+                    #'vae': True
+                } for label in y_names
+            ]
         },
         verbose=1)
 
@@ -72,6 +74,7 @@ if __name__ == '__main__':
         validation_data=valid_dataset,
         batch_size=128,
         callbacks=callbacks,
-        epochs=100000,
-        #pretrain_epochs=1000,
+        epochs=1000,
+        pretrain_epochs=1000,
         verbose=1)
+    m.save('roc/cafa/mlom/%s' % m.name, weights=False)
