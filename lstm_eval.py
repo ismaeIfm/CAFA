@@ -32,7 +32,7 @@ if __name__ == '__main__':
 
     ############################################################################
     tknzr_char_enc = TokenizerWrapper(
-        nb_words=500, max_input_length=500, char_level=True)
+        nb_words=25, max_input_length=500, char_level=True)
     tknzr_char_enc.fit(data[X_name])
 
     lstm_model = get_lstm_model(input_encoder=tknzr_char_enc, name='lstm')
@@ -75,5 +75,5 @@ if __name__ == '__main__':
         batch_size=512,
         callbacks=callbacks,
         epochs=100000,
-        pretrain_epochs=1000,
+        #pretrain_epochs=1000,
         verbose=1)
