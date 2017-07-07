@@ -41,7 +41,7 @@ if __name__ == '__main__':
 
     m = MLOM(
         name='lstm_vae',
-        models=[seqVec],
+        models=[lstm],
         format_={
             'X':
             X_name,
