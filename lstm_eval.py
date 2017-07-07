@@ -35,8 +35,7 @@ if __name__ == '__main__':
         nb_words=500, max_input_length=500, char_level=True)
     tknzr_char_enc.fit(data[X_name])
 
-    lstm_model = models.get_lstm_model(
-        input_encoder=tknzr_char_enc, name='lstm')
+    lstm_model = get_lstm_model(input_encoder=tknzr_char_enc, name='lstm')
     lstm = {'model': lstm_model, 'input_encoder': tknzr_char_enc}
     ############################################################################
 
