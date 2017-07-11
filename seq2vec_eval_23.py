@@ -71,7 +71,7 @@ if __name__ == '__main__':
             input_encoders=m.get_input_encoders())
     ]
 
-    m.fit(
+    m.fit_generator(
         data=train_data,
         encoded=False,
         validation_data=valid_dataset,
