@@ -25,8 +25,8 @@ if __name__ == '__main__':
     logging.info('*** Formatting data...')
     data = get_data(data=data, X_name=X_name, y_names=y_names)
 
-    train_data = get_data(data=cafa2, X_name=X_name, y_names=y_names)
-    valid_dataset = get_data(data=cafa3, X_name=X_name, y_names=y_names)
+    train_data = get_data(data=cafa_2, X_name=X_name, y_names=y_names)
+    valid_dataset = get_data(data=cafa_3, X_name=X_name, y_names=y_names)
     label_encoders = {}
     for l in y_names:
         label_encoders[l] = OutputEncoder()
